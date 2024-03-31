@@ -30,7 +30,10 @@ public class MorseController {
 
 
 
+    //A HashMap containing all characters that can be translated into morse code
     private final HashMap<Character, String> morseCodeMap;
+
+    //A Hashmap which contains all morse code characters that can be translated into letters
     private final HashMap<String, Character> flippedMap = new HashMap<>();
 
     public MorseController(){
@@ -197,6 +200,7 @@ public class MorseController {
     }
 
 
+    //These functions take you to the different pages
     @FXML
     void onActionExample(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/fxmlfiles/example-view.fxml"));
@@ -290,6 +294,7 @@ public class MorseController {
         englishCodeTextArea.clear();
     }
 
+    //Translates inputted text to morse code
     public String translateToMorse(String textToTranslate){
         StringBuilder translatedText = new StringBuilder();
         for(Character letter : textToTranslate.toCharArray()){
@@ -299,8 +304,13 @@ public class MorseController {
         return translatedText.toString();
     }
 
+    //Translates morse code character to morse code
     @FXML
     public String translateToChar(String charToTranslate) {
+
+        if (charToTranslate.length() > 6) {
+            englishCodeTextArea.setText("Please insert a valid morse code character");
+        }
 
         englishCodeTextArea.setText(String.valueOf(flippedMap.get(charToTranslate)));
 
